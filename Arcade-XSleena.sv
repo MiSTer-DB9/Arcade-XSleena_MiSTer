@@ -346,12 +346,12 @@ assign USER_OUT = USER_OUT_DRIVE;
 // XSleena consumer order (CONF_STR "J1,Shot,Jump,Start P1,Coin,Start P2,Pause"):
 //   [3:0]=UDLR  [4]=Shot(A)  [5]=Jump(B)  [6]=Start P1  [7]=Coin  [8]=Start P2  [9]=Pause
 // 2-button game (digital, 8-way + 2 buttons) -> coin-chord Rule: Coin uses
-//   joydb[11] | (joydb[10] & joydb[5]) so a 3-button MD pad (no Mode/Select)
+//   joydb_1[11] | (joydb_1[10] & joydb_1[5]) so a 3-button MD pad (no Mode/Select)
 //   can still insert coins via Start+B; 6-button MD / DB15 / Saturn use the
 //   native Mode/Select/R at [11] directly.
-//   Start P1 <- joydb[10] (Start)
-//   Start P2 <- joydb[6]  (C, spare face button — dedicated P2-start/continue)
-//   Pause    <- joydb[9]  (Z, convenience — not a cabinet button)
+//   Start P1 <- joydb_1[10] (Start)
+//   Start P2 <- joydb_1[6]  (C, spare face button — dedicated P2-start/continue)
+//   Pause    <- joydb_1[9]  (Z, convenience — not a cabinet button)
 wire [15:0] joystick_0 = joydb_1ena ? (OSD_STATUS ? 16'b0 :
         {6'b0, joydb_1[9], joydb_1[6], joydb_1[11]|(joydb_1[10]&joydb_1[5]), joydb_1[10], joydb_1[5:4], joydb_1[3:0]})
         : joystick_0_USB;
